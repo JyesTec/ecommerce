@@ -58,14 +58,6 @@ public class Customer {
 		super();
 	}
 
-//	@Override
-////	public String toString() {
-////		return "Customer [customerId=" + customerId + ", customerName=" + customerName + ", gender=" + gender
-////				+ ", contactNumber=" + contactNumber + ", email=" + email + ", username=" + username + ", password="
-////				+ password + ", role=" + role + ", address=" + address + ", cart=" + cart + ", order=" + order
-////				+ "]";
-////	}
-//	
 	
 
 	public int getCustomerId() {
@@ -73,13 +65,6 @@ public class Customer {
 	}
 
 
-//	@Override
-//	public String toString() {
-//		return "";
-//		return "Customer [customerId=" + customerId + ", customerName=" + customerName + ", gender=" + gender
-//				+ ", contactNumber=" + contactNumber + ", email=" + email + ", username=" + username + ", password="
-//				+ password  + ", role=" + role + ", cart=" + cart + "]";
-//	}
 
 	public void setCustomerId(int customerId) {
 		this.customerId = customerId;
@@ -206,44 +191,6 @@ public class Customer {
 		this.order = order;
 	}
 
-//	public Customer(int customerId, @NotBlank String customerName, @NotBlank String gender,
-//			@NotBlank @Pattern(regexp = "\\d{10}") String contactNumber, @NotBlank @Email String email,
-//			@NotBlank(message = "Username is required") @Pattern(regexp = "^[a-zA-Z0-9_]+$", message = "Username should contain only alphanumeric characters and underscores") String username,
-//			String password, Address address, String role, Cart cart) {
-//		super();
-//		this.customerId = customerId;
-//		this.customerName = customerName;
-//		this.gender = gender;
-//		this.contactNumber = contactNumber;
-//		this.email = email;
-//		this.username = username;
-//		this.password = password;
-//		this.address = address;
-//		this.role = role;
-//		this.cart = cart;
-//	}
-//
-//
-//
-//	public Customer(int customerId, @NotBlank String customerName, @NotBlank String gender,
-//			@NotBlank @Pattern(regexp = "\\d{10}") String contactNumber, @NotBlank @Email String email,
-//			@NotBlank(message = "Username is required") @Pattern(regexp = "^[a-zA-Z0-9_]+$", message = "Username should contain only alphanumeric characters and underscores") String username,
-//			String password, String role,Address address, Cart cart, List<Order> order) {
-//
-//
-//		super();
-//		this.customerId = customerId;
-//		this.customerName=customerName;
-//		this.gender = gender;
-//		this.contactNumber = contactNumber;
-//		this.email = email;
-//		this.username = username;
-//		this.password = password;
-//		this.role = role;
-//		this.address = address;
-//		this.cart = cart;
-//		this.order = order;
-//	}
 	
 	
     

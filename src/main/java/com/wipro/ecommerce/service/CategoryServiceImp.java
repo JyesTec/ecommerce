@@ -24,9 +24,7 @@ public class CategoryServiceImp implements ICategoryService {
 		logger.info("Adding new Category");
 		Category category = new Category();
 		category.setCategoryId(categoryDTO.getCategoryId());
-		category.setCategoryName(category.getCategoryName());
-		//category.setSubCategories(categoryDTO.getSubCategories());
-		
+		category.setCategoryName(category.getCategoryName());	
 		return repo.save(category);
 	}
 
@@ -41,7 +39,6 @@ public class CategoryServiceImp implements ICategoryService {
 		logger.info("Updating the Category");
 		category.setCategoryId(categoryDTO.getCategoryId());
 		category.setCategoryName(categoryDTO.getCategoryName());
-		//category.setSubCategories(categoryDTO.getSubCategories());
 		
 		return repo.save(category);
 	}
@@ -72,7 +69,6 @@ public class CategoryServiceImp implements ICategoryService {
 		CategoryDTO dto = new CategoryDTO();
 		dto.setCategoryId(category.getCategoryId());
 		dto.setCategoryName(category.getCategoryName());
-	//	dto.setSubCategories(category.getSubCategories());
 	
 		return dto;
 	}

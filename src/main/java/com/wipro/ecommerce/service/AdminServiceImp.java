@@ -52,8 +52,6 @@ public class AdminServiceImp implements IAdminService{
 	@Autowired
 	IOrderService orderService;
 	
-//	@Autowired
-//	PasswordEncoder passwordEncoder;
 	@Autowired
 	CategoryRepository categoryRepo;
 
@@ -66,7 +64,6 @@ public class AdminServiceImp implements IAdminService{
 		admin.setAdminName(admindto.getAdminName());
 		admin.setEmail(admindto.getEmail());
 		admin.setJoiningDate(admindto.getJoiningDate());
-//		admin.setPassword(passwordEncoder.encode(admindto.getPassword()));
 		admin.setPhoneNumber(admindto.getPassword());
 		admin.setPhoneNumber(admindto.getPhoneNumber());
 		admin.setRole(admindto.getRole());

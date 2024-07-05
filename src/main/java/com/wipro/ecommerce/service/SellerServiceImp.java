@@ -32,8 +32,6 @@ public class SellerServiceImp implements ISellerService {
     ISubCategoryService subCategoryService;
     @Autowired
     IProductService productService;
-//    @Autowired
-//    PasswordEncoder passwordEncoder;
     
     private static final Logger logger = LoggerFactory.getLogger(SellerServiceImp.class);
 	

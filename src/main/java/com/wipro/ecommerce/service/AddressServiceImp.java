@@ -16,8 +16,6 @@ public class AddressServiceImp implements IAddressService {
     AddressRepository repo;
     
     private static final Logger logger = LoggerFactory.getLogger(AddressServiceImp.class);
-
-    
 	@Override
 	public Address addAddress(AddressDTO addressDTO) {
 		logger.info("Adding new address: "+addressDTO);

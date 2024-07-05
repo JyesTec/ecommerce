@@ -16,7 +16,6 @@ import jakarta.validation.constraints.Size;
 public class Address {
 	
 		@Id
-
 		@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	   	private int addressId;        
 		@NotBlank

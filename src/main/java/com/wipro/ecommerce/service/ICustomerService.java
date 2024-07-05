@@ -38,7 +38,6 @@ public interface ICustomerService {
 	public String deleteProductFromCustomerCart(int customerId, int productId);
 	public List<Product> viewProductsBySubCategoryName(String subcategoryName);
 	public List<Order> viewOrderByCustomerId(int customerId);
-//	public String sendingOTP(String username, String phoneNumber);
 	public String placeOrder(int customerId, String paymentMethod, String otp)throws ProductNotFoundException ;
 
 }

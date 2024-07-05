@@ -10,7 +10,6 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.wipro.ecommerce.dto.CustomerDTO;
@@ -29,10 +28,7 @@ import com.wipro.ecommerce.exception.ProductNotFoundException;
 import com.wipro.ecommerce.repository.CustomerRepository;
 import com.wipro.ecommerce.repository.OrderRepository;
 import com.wipro.ecommerce.repository.ProductRepository;
-//import com.hexaware.service.SmsService;
-//import com.twilio.Twilio;
-//import com.hexaware.service.SmsService;
-//import com.twilio.Twilio;
+
 @Service
 public class CustomerServiceImp implements ICustomerService {
     @Autowired
@@ -53,12 +49,9 @@ public class CustomerServiceImp implements ICustomerService {
     IPaymentService paymentService;
     @Autowired
     ICartService cartService;
-//    @Autowired
-//    PasswordEncoder passwordEncoder;
     @Autowired
     OrderRepository orderRepo;
-//    @Autowired
-//    SmsService smsService;
+
     
     private static final Logger logger = LoggerFactory.getLogger(CustomerServiceImp.class);
 	
@@ -72,9 +65,6 @@ public class CustomerServiceImp implements ICustomerService {
 		customer.setGender(customerDTO.getGender());
 		customer.setContactNumber(customerDTO.getContactNumber());
 		customer.setAddress(customerDTO.getAddress());
-//		customer.setOrder(customerDTO.getOrder());		
-//		customer.setCart(customerDTO.getCart());
-//		customer.setPassword(passwordEncoder.encode(customerDTO.getPassword()));
 		customer.setRole(customerDTO.getRole());
 		customer.setUsername(customerDTO.getUsername());
 
@@ -92,7 +82,6 @@ public class CustomerServiceImp implements ICustomerService {
 		customer.setGender(customerDTO.getGender());
 		customer.setContactNumber(customerDTO.getContactNumber());
 		customer.setAddress(customerDTO.getAddress());
-//		customer.setOrder(customerDTO.getOrder());
 
 		customer.setCart(customerDTO.getCart());
 		customer.setPassword(customerDTO.getPassword());
@@ -121,7 +110,6 @@ public class CustomerServiceImp implements ICustomerService {
 		dto.setGender(customer.getGender());
 		dto.setContactNumber(customer.getContactNumber());
 		dto.setAddress(customer.getAddress());
-//		dto.setOrder(customer.getOrder());
 		dto.setCart(customer.getCart());
 		dto.setPassword(customer.getPassword());
 		dto.setRole(customer.getRole());
@@ -185,7 +173,7 @@ public class CustomerServiceImp implements ICustomerService {
                          }else {
                          existingCartItem.setItemQuantity(quantity);}
                      } else {
-                         // Create a new cart item
+                   
                          CartItem cartItem = new CartItem();
                          cartItem.setCart(cart);
                          cartItem.setProduct(product);
@@ -237,19 +225,10 @@ public class CustomerServiceImp implements ICustomerService {
 	    if (cart == null || cart.getCartItems().isEmpty()) {
 	        return "Cart is empty. Cannot place an order.";
 	    }
-//	    OtpValidationRequest otpValidationRequest = new OtpValidationRequest();
-//	    otpValidationRequest.setUsername(customer.getUsername()); 
-//        otpValidationRequest.setOtpNumber(otp);
-//        logger.info(otpValidationRequest.toString());
-//        String validationResponse = smsService.validateOtp(otpValidationRequest);
-//        logger.info(validationResponse);
-        if (true) {
-//	    
+        if (true) {	    
 	    Order order = new Order();
 	    order.setCustomer(customer);
 	    order.setOrderDate(LocalDate.now());
-	    
-	   // order.setPaymentMethod(paymentMethod);
 	    
 	    List<OrderItem> orderItems = new ArrayList<>();
 	    for (CartItem cartItem : cart.getCartItems()) {
@@ -309,17 +288,6 @@ public class CustomerServiceImp implements ICustomerService {
 		return "OTP validation failed. Order not placed.";
 	}
 	}
-	
-//	@Override
-//	public String sendingOTP(String username, String phoneNumber) {
-//	
-//        OtpRequest otpRequest = new OtpRequest();
-//        otpRequest.setUsername(username); 
-//        otpRequest.setPhoneNumber(phoneNumber);
-//        OtpResponseDto otpResponse = smsService.sendSMS(otpRequest);
-//		
-//		return otpResponse.getMessage();
-//	}
 
 	@Override
 	public Optional<Customer> fetchCustomerDetails(String username) throws CustomerNotFoundException {

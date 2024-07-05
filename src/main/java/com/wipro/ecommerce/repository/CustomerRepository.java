@@ -12,11 +12,7 @@ import com.wipro.ecommerce.entity.Customer;
 import com.wipro.ecommerce.entity.Product;
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer,Integer> {
-	
-
-
 	Optional<Customer> findByUsername(String username);
-	 
 	 
 	Customer findByEmail(String email);
 

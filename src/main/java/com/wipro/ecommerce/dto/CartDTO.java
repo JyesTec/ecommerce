@@ -50,17 +50,12 @@ public class CartDTO {
 		this.totalPrice = totalPrice;
 	}
 
-	
-
-	
 	public CartDTO(int cartId, double totalPrice) {
 		super();
 		this.cartId = cartId;
 		this.totalPrice = totalPrice;
 		
 	}
-	
-
 	public CartDTO(int cartId, List<CartItem> cartItems, double totalPrice, Customer customer) {
 		super();
 		this.cartId = cartId;

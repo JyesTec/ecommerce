@@ -25,9 +25,6 @@ public class OrderServiceImp implements IOrderService {
 		Order order=new Order();
 		order.setOrderId(orderDTO.getOrderId());
 		order.setOrderDate(orderDTO.getOrderDate());
-//		order.setDeliveryDate(order.getDeliveryDate());
-//		order.setStatus(orderDTO.getStatus());
-//		order.setStatusDescription(orderDTO.getStatusDescription());
 		order.setTotalAmount(orderDTO.getTotalAmount());
 		order.setPayment(orderDTO.getPayment());
 		order.setCustomer(orderDTO.getCustomer());
@@ -45,13 +42,7 @@ public class OrderServiceImp implements IOrderService {
 		logger.info("Updating new Order");
 		order.setOrderId(orderDTO.getOrderId());
 		order.setOrderDate(orderDTO.getOrderDate());
-		//order.setDeliveryDate(order.getDeliveryDate());
-		//order.setStatus(orderDTO.getStatus());
-		//order.setStatusDescription(orderDTO.getStatusDescription());
 		order.setTotalAmount(orderDTO.getTotalAmount());
-		//order.setPayment(orderDTO.getPayment());
-		//order.setCustomer(orderDTO.getCustomer());
-		//order.setSellers(orderDTO.getSellers());
 	
 		return repo.save(order);
 	}
@@ -76,13 +67,6 @@ public class OrderServiceImp implements IOrderService {
 		OrderDTO dto=new OrderDTO();
 		dto.setOrderId(order.getOrderId());
 		dto.setOrderDate(order.getOrderDate());
-		//dto.setDeliveryDate(order.getDeliveryDate());
-		//dto.setStatus(order.getStatus());
-		//dto.setStatusDescription(order.getStatusDescription());
-	//	dto.setTotalAmount(order.getTotalAmount());
-		//dto.setPayment(order.getPayment());
-		//dto.setCustomer(order.getCustomer());
-		//dto.setSellers(order.getSellers());
 		dto.setOrderItems(order.getOrderItems());
 		
 		return dto;

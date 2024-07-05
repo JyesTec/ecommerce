@@ -84,14 +84,9 @@ public class ProductServiceImp implements IProductService {
 		ProductDTO dto=new ProductDTO();
 		dto.setProductId(product.getProductId());
 	    dto.setBrand(product.getBrand());
-	  //  dto.setCart(product.getCart());
-	 //   dto.setCategory(product.getCategory());
 	    dto.setCreatedAt(product.getCreatedAt());
 	   dto.setDescription(product.getDescription());
 	    dto.setModifiedAt(product.getModifiedAt());
-//	    product.setCreatedAt(LocalDateTime.of(LocalDate.now(), LocalTime.now()));
-//	    product.setDescription(productDTO.getDescription());
-//	    product.setModifiedAt(LocalDateTime.of(LocalDate.now(), LocalTime.now()));
 	    dto.setPrice(product.getPrice());
 	    dto.setProductImageURL(product.getProductImageURL());
 	   dto.setProductName(product.getProductName());
