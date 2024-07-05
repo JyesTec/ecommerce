@@ -1,4 +1,4 @@
-package com.hexaware.ecommerce.service;
+package com.wipro.ecommerce.service;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.intThat;

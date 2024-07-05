@@ -1,4 +1,4 @@
-package com.hexaware.ecommerce;
+package com.wipro.ecommerce;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
