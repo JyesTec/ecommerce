@@ -40,7 +40,7 @@ import com.wipro.ecommerce.service.ISubCategoryService;
 
 import jakarta.validation.Valid;
 
-@CrossOrigin("localhost://4200")
+//@CrossOrigin("localhost://4200")
 @RestController
 @RequestMapping("api/seller")
 public class SellerRestController {
@@ -61,12 +61,13 @@ public class SellerRestController {
 	@Autowired
 	ISubCategoryService subCategoryService;
 	
+	//run
 	@PostMapping("/register")
 	public SellerDTO registerSeller(@RequestBody @Valid SellerDTO sellerDTO) {
 		return service.registerSeller(sellerDTO);
 	}
 	
-
+    //run
 	@PutMapping("/update")
     public Seller updateSeller(@RequestBody @Valid  SellerDTO sellerDTO) throws SellerNotFoundException{
 
@@ -79,104 +80,72 @@ public class SellerRestController {
 		return service.getAllOrder();
 	}
 	
-	@GetMapping("/getAllProduct")
-	public List<Product> getAllProduct(){
-		return service.getAllProduct();
-	}
 	
+	//run
 	@GetMapping("/getAllCategory")
 	public List<Category> getAllCategory(){
 		return service.getAllCategory();
 	}
 	
+	//run
 	@GetMapping("/getAllSubCategory")
 	public List<SubCategory> getAllSubCategory(){
 		return service.getAllSubCategory();
-	}
-	
-	@PostMapping("/addProduct")
-	public Product addProduct(@RequestBody ProductDTO productdto) throws SellerNotFoundException, SubCategoryNotFoundException {
-		SellerDTO sellerdto = service.getSellerById(productdto.getSellerId());
-		Seller seller = service.updateSeller(sellerdto);
-		SubCategoryDTO subCategoryDto = subCategoryService.getSubCategoryById(productdto.getSubCateegoryId());
-		SubCategory subCategory = subCategoryService.updateSubCategory(subCategoryDto);
-	    productdto.setSeller(seller);
-	    productdto.setSubCategory(subCategory);
-		return service.addProduct(productdto);
-	}
-	
-	@PostMapping("/updateProduct")
-	public Product updateProduct(@RequestBody ProductDTO productdto) throws ProductNotFoundException, SellerNotFoundException, SubCategoryNotFoundException {
-		SellerDTO sellerdto = service.getSellerById(productdto.getSellerId());
-		Seller seller = service.updateSeller(sellerdto);
-		SubCategoryDTO subCategoryDto = subCategoryService.getSubCategoryById(productdto.getSubCateegoryId());
-		SubCategory subCategory = subCategoryService.updateSubCategory(subCategoryDto);
-	    productdto.setSeller(seller);
-	    productdto.setSubCategory(subCategory);
-		return service.updateProduct(productdto);
-	}
-	
-	@DeleteMapping("/deleteProduct/{id}")
-	public String deleteProduct(@PathVariable int id) throws ProductNotFoundException {
-		return service.deleteProduct(id);
-	}
-	
-	@GetMapping("/getProductByName/{name}")
-	public Product getProductbyName(@PathVariable String name) throws ProductNotFoundException {
-		return service.getProductbyName(name);
-	}
-	
-	@GetMapping("/getProductByID/{id}")
-	public ProductDTO getProductById(@PathVariable int id) throws ProductNotFoundException {
-		return service.getProductById(id);
 	}
 	
 	@GetMapping("/markProductOutOfStock/{sellerId}/{productId}")
 	public ProductDTO markProductOutOfStock(@PathVariable int sellerId,@PathVariable int productId) throws ProductNotFoundException{
 		return service.markProductOutOfStock(sellerId, productId);
 	}
+	
+	//run
 	@GetMapping("/viewMyProducts/{sellerId}")
 	public List<Product> viewMyProducts(@PathVariable int sellerId) throws ProductNotFoundException{
 		return service.viewMyProducts(sellerId);
 	}
 	
+	//run
 	@GetMapping("/getSellerById/{sellerId}")
 	public SellerDTO getSellerById(@PathVariable int sellerId) throws SellerNotFoundException{
 		return service.getSellerById(sellerId);
 	}
 	
+	//run
 	@GetMapping("/getSubCategoryById/{subCategoryId}")
 	public SubCategoryDTO getSubcategoryById(@PathVariable int subCategoryId) throws SubCategoryNotFoundException{
 		return service.getSubcategoryById(subCategoryId);
 	}
+	
 	
 	@GetMapping("/getOrdersBySellerId/{sellerId}")
 	public List<Integer> getOrdersBySellerId(@PathVariable int sellerId){
 		return service.getOrdersBySellerId(sellerId);
 	}
 	
+	
 	@GetMapping("/getOrdersDetailsBySellerId/{sellerId}")
 	public List<OrderDTO> getOrdersDetailsBySellerId(@PathVariable int sellerId) throws OrderNotFoundException {
 	    List<Integer> orderIds = service.getOrdersBySellerId(sellerId);
 	    List<OrderDTO> orderDetails = new ArrayList<>();
-	    
 	    for (Integer orderId : orderIds) {
 	        OrderDTO order = orderService.getOrderById(orderId);
 	        orderDetails.add(order);
-	    }
-	    
+	    }  
 	    return orderDetails;
 	}
+	
 	
 	@PutMapping("/updateOrder")
 	 public Order updateOrder(@RequestBody OrderDTO orderDTO) throws OrderNotFoundException{
 		return orderService.updateOrder(orderDTO);
 	}
 	
+	
 	@GetMapping("/getPaymentDetailsBySellerId/{sellerId}")
 	public List<Integer> getPaymentsOfSeller(@PathVariable int sellerId){
 		return service.getPaymentsOfSeller(sellerId);
 	}
+	
 	
 	@GetMapping("/viewMyPayments/{sellerId}")
 	public List<PaymentDTO> viewMyPayments(@PathVariable int sellerId){
@@ -188,15 +157,13 @@ public class SellerRestController {
 		}
 		return paymentDetails;
 	}
+	
 	@GetMapping("viewAllOrderItemsOfSellerInOrder/{orderId}/{sellerId}")
 	public List<OrderItem> viewAllOrderItemsOfSellerInOrder(@PathVariable int orderId,@PathVariable int sellerId){
 		return orderItemService.viewAllOrderItemsOfSellerInOrder(orderId, sellerId);
 	}
 	
-	@PutMapping("updateOrderItem")
-	public OrderItem updateOrderItem(@RequestBody OrderItemDTO orderItemDTO) {
-		return orderItemService.updateOrderItem(orderItemDTO);
-	}
+	
 	
 	@GetMapping("/getOrderById/{orderId}")
 	public OrderDTO getOrderById(@PathVariable int orderId) throws OrderNotFoundException {

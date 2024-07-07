@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.wipro.ecommerce.dto.PaymentDTO;
 import com.wipro.ecommerce.dto.SubCategoryDTO;
 import com.wipro.ecommerce.entity.Admin;
 import com.wipro.ecommerce.entity.Category;
@@ -42,17 +41,19 @@ public class AdminRestController {
 	
 
 	
-	
+	//run
 	@GetMapping("/viewAllProduct")
 	public List<Product> viewAllProducts() {
 		return service.viewAllProducts();
 	}
 	
+	//run
 	@GetMapping("/viewAllCategory")
 	public List<Category> viewAllCategory(){
 		return service.viewAllCategory();
 	}
 
+	//run
 	@GetMapping("/viewAllSubCategory")
 	public List<SubCategory> viewAllSubCategory(){
 		return service.viewAllSubCategory();
@@ -64,6 +65,7 @@ public class AdminRestController {
 		return service.viewAllSeller();
 	}
 	
+	//run
 	@GetMapping("/viewAllCustomer")
 	public List<Customer> viewAllCustomer(){
 		return service.viewAllCustomer();
@@ -79,24 +81,27 @@ public class AdminRestController {
 		return service.deleteProduct(id);
 	}
 	
+	//run
 	@DeleteMapping("/deleteCategory/{id}")
 	public String deleteCategory(@PathVariable int id) throws CategoryNotFoundException {
 		return service.deleteCategory(id);
 	}
 	
+	//run
 	@DeleteMapping("/deleteSubCategory/{id}")
 	public String deleteSubCategory(@PathVariable int id) throws SubCategoryNotFoundException {
 		return service.deleteSubCategory(id);
 	}
 	
-
+   //run
 	 @DeleteMapping("/deleteSeller/{id}")
 	    public  String deleteSeller(@PathVariable int id) throws SellerNotFoundException {
 	                return service.deleteSeller(id);
 	        }
 	    
-	        @DeleteMapping("/deleteCustomer/{id}")
-	    public String deleteCustomer(@PathVariable int id) throws CustomerNotFoundException {
+	 //run
+	   @DeleteMapping("/deleteCustomer/{id}")
+	   public String deleteCustomer(@PathVariable int id) throws CustomerNotFoundException {
 	                return service.deleteCustomer(id);
 	            
 	    }
@@ -107,21 +112,27 @@ public class AdminRestController {
 		return service.viewAllOrder();
 	}
 
-     @PostMapping("/addPayment")
-      public Payment addPayment(@RequestBody PaymentDTO payment) {
-	   return service.addPayment(payment);
+//     @PostMapping("/addPayment")
+//      public Payment addPayment(@RequestBody PaymentDTO payment) {
+//	   return service.addPayment(payment);
 	   
-     }
+ //    }
+	
+	//run
      @PostMapping("/addCategory")
 	   public Category addCategory(@RequestBody Category category) {
 		   return service.addCategory(category);
 		   
 	   }
+     
+     //run
 	   @PostMapping("/addSubCategory")
 	    public SubCategory addSubCategory(@RequestBody SubCategoryDTO subcategorydto) {
 	    	return service.addSubCategory(subcategorydto);
 	    
-}
+     }
+	   
+	   
 	   @GetMapping("/viewAdminById/{adminId}")
 	   public Admin viewAdminById(@PathVariable int adminId) throws AdminNotFoundException {
 		   return service.viewAdminById(adminId);

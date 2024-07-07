@@ -12,10 +12,15 @@ public class CartItemDTO {
 	 private Product product;
 	 @JsonIgnore
 	 private Cart cart;
+
+	
 	 public CartItemDTO() {
 		super();
 		
 	}
+
+	
+
 	public CartItemDTO(int cartitemId, int itemQuantity, Product product, Cart cart) {
 		super();
 		this.cartitemId = cartitemId;
@@ -23,6 +28,9 @@ public class CartItemDTO {
 		this.product = product;
 		this.cart = cart;
 	}
+
+
+
 	public int getCartitemId() {
 		return cartitemId;
 	}
@@ -38,13 +46,20 @@ public class CartItemDTO {
 	public void setItemQuantity(int itemQuantity) {
 		this.itemQuantity = itemQuantity;
 	}
+
+	
+
 	public Product getProduct() {
 		return product;
 	}
 
+
+
 	public void setProduct(Product product) {
 		this.product = product;
 	}
+
+
 
 	public Cart getCart() {
 		return cart;

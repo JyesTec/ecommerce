@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import com.wipro.ecommerce.dto.CustomerDTO;
 import com.wipro.ecommerce.dto.ProductDTO;
+import com.wipro.ecommerce.entity.Address;
 import com.wipro.ecommerce.entity.Cart;
 import com.wipro.ecommerce.entity.CartItem;
 import com.wipro.ecommerce.entity.Category;
@@ -25,6 +26,7 @@ import com.wipro.ecommerce.entity.Product;
 import com.wipro.ecommerce.entity.SubCategory;
 import com.wipro.ecommerce.exception.CustomerNotFoundException;
 import com.wipro.ecommerce.exception.ProductNotFoundException;
+import com.wipro.ecommerce.repository.AddressRepository;
 import com.wipro.ecommerce.repository.CustomerRepository;
 import com.wipro.ecommerce.repository.OrderRepository;
 import com.wipro.ecommerce.repository.ProductRepository;
@@ -51,7 +53,8 @@ public class CustomerServiceImp implements ICustomerService {
     ICartService cartService;
     @Autowired
     OrderRepository orderRepo;
-
+    @Autowired
+    AddressRepository addressRepository;
     
     private static final Logger logger = LoggerFactory.getLogger(CustomerServiceImp.class);
 	
@@ -64,16 +67,19 @@ public class CustomerServiceImp implements ICustomerService {
 		customer.setCustomerName(customerDTO.getCustomerName());
 		customer.setGender(customerDTO.getGender());
 		customer.setContactNumber(customerDTO.getContactNumber());
+		//customer.setAddress(customerDTO.getAddress());
 		customer.setAddress(customerDTO.getAddress());
+		customer.setPassword(customerDTO.getPassword());
+	    Address savedAddress = addressRepository.save(customerDTO.getAddress()); // Save address using JPA
+	    customer.setAddress(savedAddress);
 		customer.setRole(customerDTO.getRole());
 		customer.setUsername(customerDTO.getUsername());
-
-		 repo.save(customer);
-		 return "New customer Registered";
+	    repo.save(customer);
+	    return "New customer Registered";
 	}
 
 	@Override
-	public Customer updateCustomer(CustomerDTO customerDTO)throws CustomerNotFoundException  {
+	public String updateCustomer(CustomerDTO customerDTO)throws CustomerNotFoundException  {
 		logger.info("Updating the customer");
 		Customer customer = new Customer();
 		customer.setCustomerId(customerDTO.getCustomerId());
@@ -81,13 +87,15 @@ public class CustomerServiceImp implements ICustomerService {
 		customer.setCustomerName(customerDTO.getCustomerName());
 		customer.setGender(customerDTO.getGender());
 		customer.setContactNumber(customerDTO.getContactNumber());
+		 Address savedAddress = addressRepository.save(customerDTO.getAddress());
+		 customer.setAddress(savedAddress);
 		customer.setAddress(customerDTO.getAddress());
-
 		customer.setCart(customerDTO.getCart());
 		customer.setPassword(customerDTO.getPassword());
 		customer.setRole(customerDTO.getRole());
 		customer.setUsername(customerDTO.getUsername());
-		return repo.save(customer);
+		 repo.save(customer);
+		 return "Customer Update";
 	}
 
 	@Override
@@ -96,6 +104,16 @@ public class CustomerServiceImp implements ICustomerService {
 		repo.deleteById(customerId);
 		return "Customer with customerId "+customerId+" deleted.";
 	}
+	
+//	public String deleteProductById(int productId) throws ProductNotFoundException{
+//		Customer product=repo.findById(productId).orElse(null);
+//		if(product == null) {
+//			throw new ProductNotFoundException("Product with productId: "+productId+" not found.");
+//			}
+//		logger.info("Deleting the product with productId: "+productId);
+//		repo.deleteById(productId);
+//		return "Product with productId "+productId+" deleted.";
+//	}
 
 	@Override
 	public CustomerDTO getCustomerById(int customerId) throws CustomerNotFoundException {

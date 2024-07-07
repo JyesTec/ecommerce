@@ -22,12 +22,12 @@ public class OrderItemServiceImp implements IOrderItemService{
 		
 		OrderItem orderItem = new OrderItem();
 		orderItem.setOrderItemId(orderItemDTO.getOrderItemId());
-		orderItem.setProduct(orderItemDTO.getProduct());
+//		orderItem.setProduct(orderItemDTO.getProduct());
 		orderItem.setDeliveryDate(orderItemDTO.getDeliveryDate());
-		orderItem.setOrder(orderItemDTO.getOrder());
+//		orderItem.setOrder(orderItemDTO.getOrder());
 		orderItem.setPrice(orderItemDTO.getPrice());
 		orderItem.setQuantity(orderItemDTO.getQuantity());
-		orderItem.setSeller(orderItemDTO.getSeller());
+//		orderItem.setSeller(orderItemDTO.getSeller());
 		orderItem.setStatus(orderItemDTO.getStatus());
 		orderItem.setStatusDescription(orderItemDTO.getStatusDescription());
 		
@@ -40,13 +40,13 @@ public class OrderItemServiceImp implements IOrderItemService{
 		OrderItem orderItem = repo.findById(orderItemId).orElse(null);
 		
 		OrderItemDTO dto = new OrderItemDTO();
-		dto.setProduct(orderItem.getProduct());
+//		dto.setProduct(orderItem.getProduct());
 		dto.setDeliveryDate(orderItem.getDeliveryDate());
-		dto.setOrder(orderItem.getOrder());
+//		dto.setOrder(orderItem.getOrder());
 		dto.setOrderItemId(orderItem.getOrderItemId());
 		dto.setPrice(orderItem.getPrice());
 		dto.setQuantity(orderItem.getQuantity());
-		dto.setSeller(orderItem.getSeller());
+//		dto.setSeller(orderItem.getSeller());
 		dto.setStatus(orderItem.getStatus());
 		dto.setStatusDescription(orderItem.getStatusDescription());
 		

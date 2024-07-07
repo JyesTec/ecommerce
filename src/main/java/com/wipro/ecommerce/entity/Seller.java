@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.core.sym.Name;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -12,6 +13,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.SequenceGenerators;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -19,8 +22,10 @@ import jakarta.validation.constraints.Pattern;
 @Entity
 public class Seller {
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	 private int sellerId;        // Primary Key
+	//@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.AUTO)
+   // @SequenceGenerator(name = "address_seq_gen", sequenceName   = "address_seq", initialValue = 201, allocationSize = 1	)
+    private int sellerId;        // Primary Key
 	@NotBlank
 	private String sellerName;
 	@NotBlank

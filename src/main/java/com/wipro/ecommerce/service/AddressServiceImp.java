@@ -18,6 +18,18 @@ public class AddressServiceImp implements IAddressService {
     private static final Logger logger = LoggerFactory.getLogger(AddressServiceImp.class);
 	@Override
 	public Address addAddress(AddressDTO addressDTO) {
+//		logger.info("Adding new address: "+addressDTO);
+//		Address address = new Address();
+//		address.setAddressId(addressDTO.getAddressId());
+//		address.setAddressLine1(addressDTO.getAddressLine1());
+//		address.setAddressLine2(addressDTO.getAddressLine2());
+//		address.setCity(addressDTO.getCity());
+//		address.setCountry(addressDTO.getCountry());
+//		address.setCustomer(addressDTO.getCustomer());
+//		address.setPostalCode(addressDTO.getPostalCode());
+//		address.setState(addressDTO.getState());	
+//		return repo.save(address);
+		
 		logger.info("Adding new address: "+addressDTO);
 		Address address = new Address();
 		address.setAddressId(addressDTO.getAddressId());

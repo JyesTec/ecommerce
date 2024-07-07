@@ -13,21 +13,28 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 
 @Entity
+@Table(name="Customer")
 public class Customer {
+	
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private int customerId;        // Primary Key
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int customerId; 
+
 	@NotBlank
     private String customerName;
+	
 	@NotBlank
     private String gender;
+	
 	@NotBlank
     private String contactNumber;
+	
     @NotBlank
     @Email
     private String email;
@@ -37,18 +44,16 @@ public class Customer {
 	private String username;
     
     private String password;
+    
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "address_id")
+    @JoinColumn(name = "address_id") 
     private Address address;
-
-
     
     private String role;
 
     @OneToOne(cascade = CascadeType.ALL,fetch=FetchType.EAGER)
     @JoinColumn(name="cartId")
     private Cart cart;
-
 
 	@OneToMany( mappedBy="customer")
     private List<Order> order= new ArrayList<Order>();

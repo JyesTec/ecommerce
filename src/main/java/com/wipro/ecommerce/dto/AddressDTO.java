@@ -18,7 +18,17 @@ public class AddressDTO {
 			super();
 			
 		}
-
+//		public AddressDTO(int addressId, String addressLine1, String addressLine2, String postalCode, String city,
+//				String state, String country) {
+//			super();
+//			this.addressId = addressId;
+//			this.addressLine1 = addressLine1;
+//			this.addressLine2 = addressLine2;
+//			this.postalCode = postalCode;
+//			this.city = city;
+//			this.state = state;
+//			this.country = country;
+//		}
 
 		public AddressDTO(int addressId, String addressLine1, String addressLine2, String postalCode, String city,
 				String state, String country, Customer customer) {
@@ -100,6 +110,9 @@ public class AddressDTO {
 		public void setCountry(String country) {
 			this.country = country;
 		}
+
+
+
 	
 		public Customer getCustomer() {
 			return customer;

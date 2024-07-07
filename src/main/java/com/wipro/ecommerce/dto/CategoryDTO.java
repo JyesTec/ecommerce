@@ -15,6 +15,7 @@ public class CategoryDTO {
 		super();
 	}
     
+
 	public CategoryDTO(int categoryId, String categoryName) {
 	super();
 	this.categoryId = categoryId;

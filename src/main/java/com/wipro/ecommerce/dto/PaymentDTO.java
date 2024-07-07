@@ -29,8 +29,6 @@ public class PaymentDTO {
 
 
 
-
-
 	public PaymentDTO(int paymentId, Order order, LocalDateTime paymentDate, double amount, String paymentMethod,
 			String paymentStatus) {
 		super();
