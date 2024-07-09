@@ -1,4 +1,5 @@
 package com.wipro.ecommerce.config;
+
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import com.wipro.ecommerce.entity.Seller;
 import com.wipro.ecommerce.repository.AdminRepository;
 import com.wipro.ecommerce.repository.CustomerRepository;
 import com.wipro.ecommerce.repository.SellerRepository;
+
 @Component
 public class AdminCustomerSellerInfoDetailsService implements UserDetailsService {
 	@Autowired
@@ -21,28 +23,27 @@ public class AdminCustomerSellerInfoDetailsService implements UserDetailsService
 	AdminRepository adminRepo;
 	@Autowired
 	SellerRepository sellerRepo;
-	
-	
+
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		// Check if the username exists in the customer table
-		Optional<Customer> customer=customerRepo.findByUsername(username);
-		if(customer.isPresent()) {
+		Optional<Customer> customer = customerRepo.findByUsername(username);
+		if (customer.isPresent()) {
 			return new CustomerInfoDetails(customer.get());
 		}
-		
+
 // Check if the username exists in the admin table
 		Optional<Admin> admin = adminRepo.findByUsername(username);
-        if (admin.isPresent()) {
-            return new AdminInfoDetails(admin.get());
-        }
-      
+		if (admin.isPresent()) {
+			return new AdminInfoDetails(admin.get());
+		}
+
 //        Check if the username exists in the seller table
-        Optional<Seller> seller = sellerRepo.findByUsername(username);
-        if (seller.isPresent()) {
-            return new SellerInfoDetails(seller.get());
-        }
-        throw new UsernameNotFoundException("User not found with username: " + username);
+		Optional<Seller> seller = sellerRepo.findByUsername(username);
+		if (seller.isPresent()) {
+			return new SellerInfoDetails(seller.get());
+		}
+		throw new UsernameNotFoundException("User not found with username: " + username);
 	}
 
 }

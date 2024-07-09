@@ -13,20 +13,18 @@ import com.wipro.ecommerce.entity.Seller;
 
 public class SellerInfoDetails implements UserDetails {
 
-	
-
 	private String name;
-    private String password;
-    private List<GrantedAuthority> authorities;
-    
-    public SellerInfoDetails(Seller seller) {
-        name=seller.getUsername();
-        password=seller.getPassword();
-        authorities= Arrays.stream(seller.getRole().split(","))
-                .map(SimpleGrantedAuthority::new) // .map(str -> new SimpleGrantedAuthority(str))
-                .collect(Collectors.toList());
-    }
-	
+	private String password;
+	private List<GrantedAuthority> authorities;
+
+	public SellerInfoDetails(Seller seller) {
+		name = seller.getUsername();
+		password = seller.getPassword();
+		authorities = Arrays.stream(seller.getRole().split(",")).map(SimpleGrantedAuthority::new) // .map(str -> new
+																									// SimpleGrantedAuthority(str))
+				.collect(Collectors.toList());
+	}
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return authorities;
@@ -34,31 +32,31 @@ public class SellerInfoDetails implements UserDetails {
 
 	@Override
 	public String getPassword() {
-	
+
 		return password;
 	}
 
 	@Override
 	public String getUsername() {
-		
+
 		return name;
 	}
 
 	@Override
 	public boolean isAccountNonExpired() {
-	
+
 		return true;
 	}
 
 	@Override
 	public boolean isAccountNonLocked() {
-		
+
 		return true;
 	}
 
 	@Override
 	public boolean isCredentialsNonExpired() {
-		
+
 		return true;
 	}
 

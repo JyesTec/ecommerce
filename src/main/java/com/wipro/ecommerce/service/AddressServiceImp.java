@@ -10,27 +10,17 @@ import org.springframework.stereotype.Service;
 import com.wipro.ecommerce.dto.AddressDTO;
 import com.wipro.ecommerce.entity.Address;
 import com.wipro.ecommerce.repository.AddressRepository;
+
 @Service
 public class AddressServiceImp implements IAddressService {
-    @Autowired
-    AddressRepository repo;
-    
-    private static final Logger logger = LoggerFactory.getLogger(AddressServiceImp.class);
+	@Autowired
+	AddressRepository repo;
+
+	private static final Logger logger = LoggerFactory.getLogger(AddressServiceImp.class);
+
 	@Override
 	public Address addAddress(AddressDTO addressDTO) {
-//		logger.info("Adding new address: "+addressDTO);
-//		Address address = new Address();
-//		address.setAddressId(addressDTO.getAddressId());
-//		address.setAddressLine1(addressDTO.getAddressLine1());
-//		address.setAddressLine2(addressDTO.getAddressLine2());
-//		address.setCity(addressDTO.getCity());
-//		address.setCountry(addressDTO.getCountry());
-//		address.setCustomer(addressDTO.getCustomer());
-//		address.setPostalCode(addressDTO.getPostalCode());
-//		address.setState(addressDTO.getState());	
-//		return repo.save(address);
-		
-		logger.info("Adding new address: "+addressDTO);
+		logger.info("Adding new address: " + addressDTO);
 		Address address = new Address();
 		address.setAddressId(addressDTO.getAddressId());
 		address.setAddressLine1(addressDTO.getAddressLine1());
@@ -40,13 +30,13 @@ public class AddressServiceImp implements IAddressService {
 		address.setCustomer(addressDTO.getCustomer());
 		address.setPostalCode(addressDTO.getPostalCode());
 		address.setState(addressDTO.getState());
-		
+
 		return repo.save(address);
 	}
 
 	@Override
 	public Address updateAddress(AddressDTO addressDTO) {
-		
+
 		Address address = new Address();
 		address.setAddressId(addressDTO.getAddressId());
 		address.setAddressLine1(addressDTO.getAddressLine1());
@@ -62,21 +52,21 @@ public class AddressServiceImp implements IAddressService {
 
 	@Override
 	public String deleteAddressById(int addressId) {
-		
-		 logger.info("Deleting address with Id: "+addressId);
-		
+
+		logger.info("Deleting address with Id: " + addressId);
+
 		repo.deleteById(addressId);
-		
-		return "Address with addressId "+addressId+" deleted.";
+
+		return "Address with addressId " + addressId + " deleted.";
 	}
 
 	@Override
 	public AddressDTO getAddressById(int addressId) {
-		
+
 		Address address = repo.findById(addressId).orElse(null);
 		if (address == null) {
-            logger.warn("Address with ID " +addressId+ "not found.");
-            return null;
+			logger.warn("Address with ID " + addressId + "not found.");
+			return null;
 		}
 		AddressDTO dto = new AddressDTO();
 		dto.setAddressId(address.getAddressId());

@@ -11,22 +11,19 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.wipro.ecommerce.entity.Customer;
 
-public class CustomerInfoDetails implements UserDetails{
+public class CustomerInfoDetails implements UserDetails {
 	private String name;
-    private String password;
-    private List<GrantedAuthority> authorities;
-    
-    public CustomerInfoDetails(Customer customer) {
-        name=customer.getUsername();
-        password=customer.getPassword();
-        authorities= Arrays.stream(customer.getRole().split(","))
-                .map(SimpleGrantedAuthority::new) // .map(str -> new SimpleGrantedAuthority(str))
-                .collect(Collectors.toList());
-    }
-    
-    
-    
-    
+	private String password;
+	private List<GrantedAuthority> authorities;
+
+	public CustomerInfoDetails(Customer customer) {
+		name = customer.getUsername();
+		password = customer.getPassword();
+		authorities = Arrays.stream(customer.getRole().split(",")).map(SimpleGrantedAuthority::new) // .map(str -> new
+																									// SimpleGrantedAuthority(str))
+				.collect(Collectors.toList());
+	}
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub

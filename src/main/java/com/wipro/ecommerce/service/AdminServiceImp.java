@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.wipro.ecommerce.dto.AdminDTO;
@@ -26,51 +27,55 @@ import com.wipro.ecommerce.exception.SellerNotFoundException;
 import com.wipro.ecommerce.exception.SubCategoryNotFoundException;
 import com.wipro.ecommerce.repository.AdminRepository;
 import com.wipro.ecommerce.repository.CategoryRepository;
+
 @Service
-public class AdminServiceImp implements IAdminService{
+public class AdminServiceImp implements IAdminService {
 	@Autowired
 	AdminRepository adminrepo;
-	
+
 	@Autowired
 	IProductService productService;
-	
+
 	@Autowired
 	ISellerService sellerService;
-	
+
 	@Autowired
 	ICustomerService customerService;
-	
+
 	@Autowired
 	ICategoryService categoryService;
-	
+
 	@Autowired
 	ISubCategoryService subcategoryService;
-	
+
 	@Autowired
 	IPaymentService paymentService;
-	
+
 	@Autowired
 	IOrderService orderService;
-	
+
 	@Autowired
 	CategoryRepository categoryRepo;
 
 	@Autowired
 	IOrderItemService orderItemService;
+	@Autowired
+	PasswordEncoder passwordEncoder;
+
 	@Override
 	public String addAdmin(AdminDTO admindto) {
-		Admin admin=new Admin();
+		Admin admin = new Admin();
 		admin.setAdminID(admindto.getAdminID());
 		admin.setAdminName(admindto.getAdminName());
 		admin.setEmail(admindto.getEmail());
 		admin.setJoiningDate(admindto.getJoiningDate());
-		admin.setPhoneNumber(admindto.getPassword());
+		admin.setPassword(passwordEncoder.encode(admindto.getPassword()));
 		admin.setPhoneNumber(admindto.getPhoneNumber());
 		admin.setRole(admindto.getRole());
 		admin.setUsername(admindto.getUsername());
 		adminrepo.save(admin);
 		return "New Admin records added.";
-		 
+
 	}
 
 	@Override
@@ -136,7 +141,7 @@ public class AdminServiceImp implements IAdminService{
 
 	@Override
 	public Category addCategory(Category category) {
-		
+
 		return categoryRepo.save(category);
 	}
 
@@ -145,18 +150,16 @@ public class AdminServiceImp implements IAdminService{
 		return subcategoryService.addSubCategory(subcategorydto);
 	}
 
-
-	 @Override
-     public String deleteCustomer(int id) throws CustomerNotFoundException {
-             return customerService.deleteCustomerById(id);
-     }
+	@Override
+	public String deleteCustomer(int id) throws CustomerNotFoundException {
+		return customerService.deleteCustomerById(id);
+	}
 
 	@Override
 	public Optional<Admin> fetchAdminDetails(String username) throws AdminNotFoundException {
-		
+
 		return adminrepo.findByUsername(username);
 	}
-
 
 	@Override
 	public Admin viewAdminById(int adminId) throws AdminNotFoundException {
@@ -168,6 +171,5 @@ public class AdminServiceImp implements IAdminService{
 	public List<OrderItem> getOrderItemsByOrderId(int orderId) {
 		return orderItemService.getOrderItemsByOrderId(orderId);
 	}
-	
-     
+
 }

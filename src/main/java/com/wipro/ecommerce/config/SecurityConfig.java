@@ -28,74 +28,68 @@ import com.wipro.ecommerce.filter.JwtAuthFilter;
 public class SecurityConfig {
 	@Autowired
 	JwtAuthFilter authFilter;
-	
-	     @Bean
-	    //authentication
-	    public UserDetailsService userDetailsService() {
-			
-	       return (UserDetailsService) new AdminCustomerSellerInfoDetailsService();
-	    }
-	    
-		@Bean
-	    public  SecurityFilterChain   getSecurityFilterChain(HttpSecurity http) throws Exception {
-	    	
-			return http.cors().and().csrf().disable()
 
+	@Bean
+	// authentication
+	public UserDetailsService userDetailsService() {
 
-                        .authorizeHttpRequests(requests -> requests.requestMatchers("api/customer/register", "api/seller/register", "/api/admin/login/authenticate", "/api/customer/login/authenticate", "/api/seller/login/authenticate","/swagger-ui/**", "/v3/api-docs/**").permitAll())
-                        .authorizeHttpRequests(requests -> requests.requestMatchers("api/admin/**", "api/customer/**", "api/seller/**")
+		return (UserDetailsService) new AdminCustomerSellerInfoDetailsService();
+	}
 
-                                .authenticated())   //.formLogin().and().build();
-                        
-                        .sessionManagement(management -> management
-                                .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                        .authenticationProvider(authenticationProvider())
-                        .addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class)
-                        .build();
-	    	
-	    }
-		 @Bean
-		 public CorsFilter corsFilter() {
-	      CorsConfiguration config = new CorsConfiguration();
-	      config.setAllowCredentials(true);
-	      config.addAllowedOrigin("http://localhost:4200");
-	      config.addAllowedHeader("*");
-	      config.addAllowedMethod("*");
-	      
-	      UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-	      source.registerCorsConfiguration("/**", config);
-	      
-	      return new CorsFilter(source);
-	  }
-	   
-	   
-	    
-	     
-	    
-	    
+	@Bean
+	public SecurityFilterChain getSecurityFilterChain(HttpSecurity http) throws Exception {
 
-	    @Bean    
-	    public PasswordEncoder passwordEncoder() {          
-	        return new BCryptPasswordEncoder();
-	    }
+		return http.cors().and().csrf().disable()
 
-	    @Bean
-	    public AuthenticationProvider authenticationProvider(){
-	        DaoAuthenticationProvider authenticationProvider=new DaoAuthenticationProvider();
-	        authenticationProvider.setUserDetailsService(userDetailsService());
-	        authenticationProvider.setPasswordEncoder(passwordEncoder());
-	        return authenticationProvider;
-	    }
+				.authorizeHttpRequests(
+						requests -> requests
+								.requestMatchers("api/customer/register", "api/seller/register","api/admin/addAdmin",
+										"/api/admin/login/authenticate", "/api/customer/login/authenticate",
+										"/api/seller/login/authenticate", "/swagger-ui/**", "/v3/api-docs/**")
+								.permitAll())
+				.authorizeHttpRequests(
+						requests -> requests.requestMatchers("api/admin/**", "api/customer/**", "api/seller/**")
 
-	    
-	    
-	    @Bean
-	    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
-	    	
-	    	return config.getAuthenticationManager();
-	    	
-	    }
-	    
-	    
+								.authenticated()) // .formLogin().and().build();
+
+				.sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+				.authenticationProvider(authenticationProvider())
+				.addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class).build();
+
+	}
+
+	@Bean
+	public CorsFilter corsFilter() {
+		CorsConfiguration config = new CorsConfiguration();
+		config.setAllowCredentials(true);
+		config.addAllowedOrigin("http://localhost:4200");
+		config.addAllowedHeader("*");
+		config.addAllowedMethod("*");
+
+		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+		source.registerCorsConfiguration("/**", config);
+
+		return new CorsFilter(source);
+	}
+
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
+
+	@Bean
+	public AuthenticationProvider authenticationProvider() {
+		DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
+		authenticationProvider.setUserDetailsService(userDetailsService());
+		authenticationProvider.setPasswordEncoder(passwordEncoder());
+		return authenticationProvider;
+	}
+
+	@Bean
+	public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
+
+		return config.getAuthenticationManager();
+
+	}
 
 }

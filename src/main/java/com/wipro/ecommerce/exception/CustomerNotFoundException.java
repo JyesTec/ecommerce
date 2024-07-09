@@ -1,9 +1,9 @@
 package com.wipro.ecommerce.exception;
 
-public class CustomerNotFoundException extends Exception{
-	
-	public CustomerNotFoundException (String message) {
+public class CustomerNotFoundException extends Exception {
+
+	public CustomerNotFoundException(String message) {
 		super(message);
-	} 
+	}
 
 }

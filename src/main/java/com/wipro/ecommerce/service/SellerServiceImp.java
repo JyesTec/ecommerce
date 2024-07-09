@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.wipro.ecommerce.dto.ProductDTO;
@@ -33,6 +34,8 @@ public class SellerServiceImp implements ISellerService {
 	ISubCategoryService subCategoryService;
 	@Autowired
 	IProductService productService;
+	@Autowired
+	PasswordEncoder passwordEncoder;
 
 	private static final Logger logger = LoggerFactory.getLogger(SellerServiceImp.class);
 
@@ -52,6 +55,7 @@ public class SellerServiceImp implements ISellerService {
 //		seller.setPassword(passwordEncoder.encode(sellerDTO.getPassword()));
 		seller.setRole(sellerDTO.getRole());
 		seller.setUsername(sellerDTO.getUsername());
+		seller.setPassword(passwordEncoder.encode(sellerDTO.getPassword()));
 		repo.save(seller);
 		return sellerDTO;
 

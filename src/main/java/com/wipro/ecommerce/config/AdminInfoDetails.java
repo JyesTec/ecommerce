@@ -11,20 +11,18 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.wipro.ecommerce.entity.Admin;
 
-public class AdminInfoDetails  implements  UserDetails{
+public class AdminInfoDetails implements UserDetails {
 	private String name;
-    private String password;
-    private List<GrantedAuthority> authorities;
-    
-    public AdminInfoDetails(Admin admin) {
-        name=admin.getUsername();
-        password=admin.getPassword();
-        authorities= Arrays.stream(admin.getRole().split(","))
-                .map(SimpleGrantedAuthority::new) // .map(str -> new SimpleGrantedAuthority(str))
-                .collect(Collectors.toList());
-    }
-	
-    
+	private String password;
+	private List<GrantedAuthority> authorities;
+
+	public AdminInfoDetails(Admin admin) {
+		name = admin.getUsername();
+		password = admin.getPassword();
+		authorities = Arrays.stream(admin.getRole().split(",")).map(SimpleGrantedAuthority::new) // .map(str -> new
+																									// SimpleGrantedAuthority(str))
+				.collect(Collectors.toList());
+	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
