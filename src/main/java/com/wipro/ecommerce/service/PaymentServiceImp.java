@@ -10,13 +10,14 @@ import org.springframework.stereotype.Service;
 import com.wipro.ecommerce.dto.PaymentDTO;
 import com.wipro.ecommerce.entity.Payment;
 import com.wipro.ecommerce.repository.PaymentRepository;
+
 @Service
 public class PaymentServiceImp implements IPaymentService {
-    @Autowired
+	@Autowired
 	PaymentRepository repo;
-	
-    private static final Logger logger = LoggerFactory.getLogger(PaymentServiceImp.class);
-	
+
+	private static final Logger logger = LoggerFactory.getLogger(PaymentServiceImp.class);
+
 	@Override
 	public Payment addPayment(PaymentDTO paymentDTO) {
 		logger.info("Adding new Payment..");
@@ -45,26 +46,26 @@ public class PaymentServiceImp implements IPaymentService {
 
 	@Override
 	public String deletePaymentById(int paymentId) {
-		logger.info("Deleting Payment with PaymentId: "+paymentId);
+		logger.info("Deleting Payment with PaymentId: " + paymentId);
 		repo.deleteById(paymentId);
-		return "Payment with paymentId "+ paymentId+ " deleted";
+		return "Payment with paymentId " + paymentId + " deleted";
 	}
 
 	@Override
 	public PaymentDTO getPaymentById(int paymentId) {
-		Payment payment=repo.findById(paymentId).orElse(null);
-		if(payment == null) {
-			logger.warn("Payment with "+paymentId+" not found.");
+		Payment payment = repo.findById(paymentId).orElse(null);
+		if (payment == null) {
+			logger.warn("Payment with " + paymentId + " not found.");
 			return null;
 		}
-		PaymentDTO dto=new PaymentDTO();
+		PaymentDTO dto = new PaymentDTO();
 		dto.setPaymentId(payment.getPaymentId());
 		dto.setAmount(payment.getAmount());
 		dto.setOrder(payment.getOrder());
 		dto.setPaymentDate(payment.getPaymentDate());
 		dto.setPaymentStatus(payment.getPaymentStatus());
 		dto.setPaymentMethod(payment.getPaymentMethod());
-		
+
 		return dto;
 	}
 

@@ -11,12 +11,11 @@ import com.wipro.ecommerce.entity.Category;
 import com.wipro.ecommerce.entity.SubCategory;
 
 @Repository
-public interface CategoryRepository extends JpaRepository<Category,Integer> {
-	
+public interface CategoryRepository extends JpaRepository<Category, Integer> {
+
 	@Query("SELECT sc FROM SubCategory sc JOIN sc.category c WHERE c.categoryId = :categoryId")
 	List<SubCategory> getSubCategoryIdByCategoryId(int categoryId);
-	
-	Optional<Category> findByCategoryName(String name);
 
+	Optional<Category> findByCategoryName(String name);
 
 }

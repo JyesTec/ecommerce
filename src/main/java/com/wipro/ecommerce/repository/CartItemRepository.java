@@ -5,8 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import com.wipro.ecommerce.entity.CartItem;
 
-
 @Repository
-public interface CartItemRepository extends JpaRepository<CartItem,Integer>  {
+public interface CartItemRepository extends JpaRepository<CartItem, Integer> {
 
 }

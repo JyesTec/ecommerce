@@ -5,8 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import com.wipro.ecommerce.entity.Payment;
 
-
 @Repository
-public interface PaymentRepository extends JpaRepository<Payment,Integer> {
+public interface PaymentRepository extends JpaRepository<Payment, Integer> {
 
 }

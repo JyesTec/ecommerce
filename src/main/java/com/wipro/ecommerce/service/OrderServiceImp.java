@@ -12,17 +12,18 @@ import com.wipro.ecommerce.entity.Order;
 import com.wipro.ecommerce.entity.OrderItem;
 import com.wipro.ecommerce.exception.OrderNotFoundException;
 import com.wipro.ecommerce.repository.OrderRepository;
+
 @Service
 public class OrderServiceImp implements IOrderService {
-    @Autowired
+	@Autowired
 	OrderRepository repo;
-    
-    private static final Logger logger = LoggerFactory.getLogger(OrderServiceImp.class);
-	
+
+	private static final Logger logger = LoggerFactory.getLogger(OrderServiceImp.class);
+
 	@Override
 	public Order addOrder(OrderDTO orderDTO) {
 		logger.info("Adding new Order");
-		Order order=new Order();
+		Order order = new Order();
 		order.setOrderId(orderDTO.getOrderId());
 		order.setOrderDate(orderDTO.getOrderDate());
 		order.setTotalAmount(orderDTO.getTotalAmount());
@@ -35,40 +36,40 @@ public class OrderServiceImp implements IOrderService {
 
 	@Override
 	public Order updateOrder(OrderDTO orderDTO) throws OrderNotFoundException {
-		Order order =repo.findById(orderDTO.getOrderId()).orElse(null);
-		if(order == null) {
-			throw new OrderNotFoundException("Order with "+orderDTO.getOrderId()+" not found.");
+		Order order = repo.findById(orderDTO.getOrderId()).orElse(null);
+		if (order == null) {
+			throw new OrderNotFoundException("Order with " + orderDTO.getOrderId() + " not found.");
 		}
 		logger.info("Updating new Order");
 		order.setOrderId(orderDTO.getOrderId());
 		order.setOrderDate(orderDTO.getOrderDate());
 		order.setTotalAmount(orderDTO.getTotalAmount());
-	
+
 		return repo.save(order);
 	}
 
 	@Override
-	public String deleteOrderById(int orderId) throws OrderNotFoundException{
-		Order order =repo.findById(orderId).orElse(null);
-		if(order == null) {
-			throw new OrderNotFoundException("Order with "+orderId+" not found.");
+	public String deleteOrderById(int orderId) throws OrderNotFoundException {
+		Order order = repo.findById(orderId).orElse(null);
+		if (order == null) {
+			throw new OrderNotFoundException("Order with " + orderId + " not found.");
 		}
-		logger.info("Deleting Order with orderId: "+orderId);
+		logger.info("Deleting Order with orderId: " + orderId);
 		repo.deleteById(orderId);
-		return "Order with orderId "+orderId+" deleted.";
+		return "Order with orderId " + orderId + " deleted.";
 	}
 
 	@Override
-	public OrderDTO getOrderById(int orderId) throws OrderNotFoundException{
-		Order order =repo.findById(orderId).orElse(null);
-		if(order == null) {
-			throw new OrderNotFoundException("Order with "+orderId+" not found.");
+	public OrderDTO getOrderById(int orderId) throws OrderNotFoundException {
+		Order order = repo.findById(orderId).orElse(null);
+		if (order == null) {
+			throw new OrderNotFoundException("Order with " + orderId + " not found.");
 		}
-		OrderDTO dto=new OrderDTO();
+		OrderDTO dto = new OrderDTO();
 		dto.setOrderId(order.getOrderId());
 		dto.setOrderDate(order.getOrderDate());
 		dto.setOrderItems(order.getOrderItems());
-		
+
 		return dto;
 	}
 
@@ -77,7 +78,5 @@ public class OrderServiceImp implements IOrderService {
 		logger.info("Fetching all Orders..");
 		return repo.findAll();
 	}
-
-	
 
 }

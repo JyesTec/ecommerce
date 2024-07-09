@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 import com.wipro.ecommerce.entity.SubCategory;
 
 @Repository
-public interface SubCategoryRepository extends JpaRepository<SubCategory,Integer> {
+public interface SubCategoryRepository extends JpaRepository<SubCategory, Integer> {
 	Optional<SubCategory> findBySubCategoryName(String name);
 }

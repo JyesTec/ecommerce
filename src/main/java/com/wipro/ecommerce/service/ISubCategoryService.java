@@ -8,9 +8,14 @@ import com.wipro.ecommerce.exception.SubCategoryNotFoundException;
 
 public interface ISubCategoryService {
 	public SubCategory addSubCategory(SubCategoryDTO subCategoryDTO);
-    public SubCategory updateSubCategory(SubCategoryDTO subCategoryDTO) throws SubCategoryNotFoundException ;
-    public String deleteSubCategoryById(int subCategoryId) throws SubCategoryNotFoundException ;
-    public SubCategoryDTO getSubCategoryById(int subCategoryId) throws SubCategoryNotFoundException ;
-    public List<SubCategory> getAllSubCategory();
-    public SubCategory getSubCategoryByName(String name);
+
+	public SubCategory updateSubCategory(SubCategoryDTO subCategoryDTO) throws SubCategoryNotFoundException;
+
+	public String deleteSubCategoryById(int subCategoryId) throws SubCategoryNotFoundException;
+
+	public SubCategoryDTO getSubCategoryById(int subCategoryId) throws SubCategoryNotFoundException;
+
+	public List<SubCategory> getAllSubCategory();
+
+	public SubCategory getSubCategoryByName(String name);
 }

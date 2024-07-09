@@ -20,25 +20,26 @@ import com.wipro.ecommerce.exception.ProductNotFoundException;
 import com.wipro.ecommerce.exception.SellerNotFoundException;
 import com.wipro.ecommerce.exception.SubCategoryNotFoundException;
 import com.wipro.ecommerce.repository.SellerRepository;
+
 @Service
 public class SellerServiceImp implements ISellerService {
-    @Autowired
+	@Autowired
 	SellerRepository repo;
-    @Autowired
-    IOrderService orderService;
-    @Autowired
-    ICategoryService categoryService;
-    @Autowired
-    ISubCategoryService subCategoryService;
-    @Autowired
-    IProductService productService;
-    
-    private static final Logger logger = LoggerFactory.getLogger(SellerServiceImp.class);
-	
+	@Autowired
+	IOrderService orderService;
+	@Autowired
+	ICategoryService categoryService;
+	@Autowired
+	ISubCategoryService subCategoryService;
+	@Autowired
+	IProductService productService;
+
+	private static final Logger logger = LoggerFactory.getLogger(SellerServiceImp.class);
+
 	@Override
 	public SellerDTO registerSeller(SellerDTO sellerDTO) {
 		logger.info("Adding a seller..");
-		Seller seller=new Seller();
+		Seller seller = new Seller();
 		seller.setAddress(sellerDTO.getAddress());
 		seller.setSellerName(sellerDTO.getSellerName());
 		seller.setBusinessName(sellerDTO.getBusinessName());
@@ -51,18 +52,17 @@ public class SellerServiceImp implements ISellerService {
 //		seller.setPassword(passwordEncoder.encode(sellerDTO.getPassword()));
 		seller.setRole(sellerDTO.getRole());
 		seller.setUsername(sellerDTO.getUsername());
-		 repo.save(seller);
-		 return sellerDTO;
-				
-		
+		repo.save(seller);
+		return sellerDTO;
+
 	}
 
 	@Override
 	public Seller updateSeller(SellerDTO sellerDTO) throws SellerNotFoundException {
-		 Seller seller=repo.findById(sellerDTO.getSellerId()).orElse(null);
-	        if(seller == null) {
-	        	throw new SellerNotFoundException("Seller with sellerId: "+sellerDTO.getSellerId()+" not found.");
-	        	}
+		Seller seller = repo.findById(sellerDTO.getSellerId()).orElse(null);
+		if (seller == null) {
+			throw new SellerNotFoundException("Seller with sellerId: " + sellerDTO.getSellerId() + " not found.");
+		}
 		logger.info("Updating the seller record...");
 		seller.setAddress(sellerDTO.getAddress());
 		seller.setSellerName(sellerDTO.getSellerName());
@@ -81,24 +81,24 @@ public class SellerServiceImp implements ISellerService {
 
 	@Override
 	public String deleteSellerById(int sellerId) throws SellerNotFoundException {
-		 Seller seller=repo.findById(sellerId).orElse(null);
-	        if(seller == null) {
-	        	throw new SellerNotFoundException("Seller with sellerId: "+sellerId+" not found.");
-	        	}
-		logger.info("Deleting the seller with sellerId: "+sellerId);
+		Seller seller = repo.findById(sellerId).orElse(null);
+		if (seller == null) {
+			throw new SellerNotFoundException("Seller with sellerId: " + sellerId + " not found.");
+		}
+		logger.info("Deleting the seller with sellerId: " + sellerId);
 		repo.deleteById(sellerId);
-		return "Seller with sellerID "+ sellerId+" deleted.";
+		return "Seller with sellerID " + sellerId + " deleted.";
 	}
 
 	@Override
-	public SellerDTO getSellerById(int sellerId) throws SellerNotFoundException{
-        Seller seller=repo.findById(sellerId).orElse(null);
-        if(seller == null) {
-        	throw new SellerNotFoundException("Seller with sellerId: "+sellerId+" not found.");
-        	}
-        SellerDTO dto=new SellerDTO();
-        dto.setAddress(seller.getAddress());
-        dto.setSellerName(seller.getSellerName());
+	public SellerDTO getSellerById(int sellerId) throws SellerNotFoundException {
+		Seller seller = repo.findById(sellerId).orElse(null);
+		if (seller == null) {
+			throw new SellerNotFoundException("Seller with sellerId: " + sellerId + " not found.");
+		}
+		SellerDTO dto = new SellerDTO();
+		dto.setAddress(seller.getAddress());
+		dto.setSellerName(seller.getSellerName());
 		dto.setBusinessName(seller.getBusinessName());
 		dto.setEmail(seller.getEmail());
 		dto.setOrders(seller.getOrder());
@@ -156,7 +156,7 @@ public class SellerServiceImp implements ISellerService {
 	}
 
 	@Override
-	public Product getProductbyName(String name) throws ProductNotFoundException{
+	public Product getProductbyName(String name) throws ProductNotFoundException {
 		return productService.getByName(name);
 	}
 
@@ -185,27 +185,24 @@ public class SellerServiceImp implements ISellerService {
 //
 
 	public ProductDTO markProductOutOfStock(int sellerId, int productId) throws ProductNotFoundException {
-	    ProductDTO productDTO = productService.getProductById(productId);
-	    if (productDTO == null) {
-	        throw new ProductNotFoundException("Product with productId: " + productId + " not found.");
-	    }
+		ProductDTO productDTO = productService.getProductById(productId);
+		if (productDTO == null) {
+			throw new ProductNotFoundException("Product with productId: " + productId + " not found.");
+		}
 
-	    // Debug logging
-	    System.out.println("SellerId from request: " + sellerId);
-	    System.out.println("SellerId from product: " + productDTO.getSeller().getSellerId());
+		// Debug logging
+		System.out.println("SellerId from request: " + sellerId);
+		System.out.println("SellerId from product: " + productDTO.getSeller().getSellerId());
 
-	    if (productDTO.getSeller().getSellerId() == sellerId) {
-	        productDTO.setStockQuantity(0);
+		if (productDTO.getSeller().getSellerId() == sellerId) {
+			productDTO.setStockQuantity(0);
 
-	        productService.updateProduct(productDTO);
-	        return productDTO;
-	    } else {
-	        throw new IllegalArgumentException("Product does not belong to the seller");
-	    }
+			productService.updateProduct(productDTO);
+			return productDTO;
+		} else {
+			throw new IllegalArgumentException("Product does not belong to the seller");
+		}
 	}
-
-
-	
 
 	@Override
 	public String login(String username, String password) {
@@ -217,6 +214,7 @@ public class SellerServiceImp implements ISellerService {
 		// TODO Auto-generated method stub
 		return repo.findByUsername(username);
 	}
+
 	@Override
 	public List<Product> viewMyProducts(int sellerId) throws ProductNotFoundException {
 		return productService.getAllProductBySellerId(sellerId);
@@ -227,16 +225,16 @@ public class SellerServiceImp implements ISellerService {
 		// TODO Auto-generated method stub
 		return subCategoryService.getSubCategoryById(subCategoryId);
 	}
+
 	@Override
 	public List<Integer> getOrdersBySellerId(int sellerId) {
 		// TODO Auto-generated method stub
 		return repo.getOrdersBySellerId(sellerId);
 	}
-	
+
 	@Override
 	public List<Integer> getPaymentsOfSeller(int sellerId) {
 		// TODO Auto-generated method stub
 		return repo.getPaymentsOfSeller(sellerId);
 	}
-	}
-
+}

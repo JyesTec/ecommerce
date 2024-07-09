@@ -5,8 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import com.wipro.ecommerce.entity.Address;
 
-
 @Repository
-public interface AddressRepository extends JpaRepository<Address,Integer> {
+public interface AddressRepository extends JpaRepository<Address, Integer> {
 
 }

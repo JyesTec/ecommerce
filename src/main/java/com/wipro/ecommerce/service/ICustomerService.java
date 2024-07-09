@@ -17,7 +17,7 @@ import com.wipro.ecommerce.exception.ProductNotFoundException;
 
 public interface ICustomerService {
 	public String registerCustomer(CustomerDTO customerDTO);
-    public String updateCustomer(CustomerDTO customerDTO) throws CustomerNotFoundException ;
+    public Customer updateCustomer(CustomerDTO customerDTO) throws CustomerNotFoundException ;
     public String deleteCustomerById(int customerId) throws CustomerNotFoundException ;
     public CustomerDTO getCustomerById(int customerId)throws CustomerNotFoundException ;
     public List<Customer> getAllCustomer();
@@ -38,7 +38,6 @@ public interface ICustomerService {
 	public String deleteProductFromCustomerCart(int customerId, int productId);
 	public List<Product> viewProductsBySubCategoryName(String subcategoryName);
 	public List<Order> viewOrderByCustomerId(int customerId);
-
 	public String placeOrder(int customerId, String paymentMethod, String otp)throws ProductNotFoundException ;
 
 }
