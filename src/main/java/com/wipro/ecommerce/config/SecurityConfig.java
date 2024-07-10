@@ -44,7 +44,19 @@ public class SecurityConfig {
 				.authorizeHttpRequests(
 						requests -> requests
 								.requestMatchers("api/customer/register", "api/seller/register","api/admin/addAdmin","api/admin/viewAdminById/**",
-										"/api/admin/login/authenticate", "/api/customer/login/authenticate",
+										"/api/admin/login/authenticate", "/api/customer/login/authenticate","api/seller/addProduct",
+										"/api/admin/viewAllProduct","/api/admin/viewAllCategory","/api/admin/viewAllSubCategory",
+										"/api/admin/viewAllSeller","/api/admin/viewAllCustomer","/api/admin/viewAllPayment",
+										"/api/admin/deleteProduct/{id}","/api/admin/deleteCategory/{id}","/api/admin/deleteSubCategory/{id}",
+										"api/seller/deleteSeller/{id}","api/seller/deleteCustomer/{id}","api/seller/viewAllOrder",
+										"api/seller/addPayment","api/seller/addCategory","api/seller/addSubCategory","api/seller/viewAdminById/{adminId}",
+										"api/seller/getOrderItemsByOrderId/{orderId}","api/seller/addProductToCustomerCart/{customerId}/{productId}/{quantity}","api/seller/viewSubCategoryByName/{name}","api/seller/viewCartitems/{customerId}",
+										"api/seller/viewAllSubCategory","api/seller/viewProductByName/{name}","api/seller/viewCategoryByName/{name}","api/seller/addPayment","api/seller/addPayment",
+										"api/seller/viewProductByPriceRange/{min}/{max}","api/seller//viewProductByBrand/{brand}","api/seller/deleteProductFromCustomerCart/{customerId}/{productId}","api/seller/viewProductsBySubCategoryName/{subcategoryName}",
+										"api/seller/viewOrdersByCustomerId/{customerId}","api/seller/placeOrder/{customerId}/{paymentMethod}/{otp}","api/seller/getAllProduct","api/seller/getAllCategory","api/seller/getAllSubCategory","api/seller/getAllSubCategory",
+										"api/seller/addProduct","api/seller/updateProduct","api/seller/eleteProduct/{id}","api/seller/getProductByName/{name}","api/seller/getProductByID/{id}","api/seller/markProductOutOfStock/{sellerId}/{productId}",
+										"api/seller/viewMyProducts/{sellerId}","api/seller/getSellerById/{sellerId}","api/seller/getSubCategoryById/{subCategoryId}",
+										"api/seller/getOrdersBySellerId/{sellerId}","api/seller/getOrderById/{orderId}","api/seller/updateOrderItem","api/seller/viewAllOrderItemsOfSellerInOrder/{orderId}/{sellerId}",
 										"/api/seller/login/authenticate", "/swagger-ui/**", "/v3/api-docs/**")
 								.permitAll())
 				.authorizeHttpRequests(
