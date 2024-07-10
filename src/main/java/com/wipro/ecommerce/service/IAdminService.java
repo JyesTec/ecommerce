@@ -28,6 +28,9 @@ public interface IAdminService {
     
     public List<Product> viewAllProducts();
     
+    public List<Admin> viewAllAdmins();
+    
+    
     public String deleteProduct(int id) throws ProductNotFoundException;
     
     public String deleteCategory(int id) throws CategoryNotFoundException;

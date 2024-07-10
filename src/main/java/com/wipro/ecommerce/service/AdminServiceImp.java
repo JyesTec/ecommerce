@@ -77,6 +77,10 @@ public class AdminServiceImp implements IAdminService {
 		return "New Admin records added.";
 
 	}
+	@Override
+	public List<Admin> viewAllAdmins() {
+		return adminrepo.findAll();
+	}
 
 	@Override
 	public List<Product> viewAllProducts() {

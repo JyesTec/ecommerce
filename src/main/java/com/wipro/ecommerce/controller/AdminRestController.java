@@ -91,6 +91,11 @@ public class AdminRestController {
 		return service.addAdmin(admindto);
 	}
 	
+	@GetMapping("/viewAllAdmins")
+	public List<Admin> viewAllAdmins() {
+		return service.viewAllAdmins();
+	}
+		
 	@GetMapping("/viewAllProduct")
 	public List<Product> viewAllProducts() {
 		return service.viewAllProducts();
@@ -158,6 +163,8 @@ public class AdminRestController {
 		return service.addPayment(payment);
 
 	}
+	
+	
 
 	@PostMapping("/addCategory")
 	public Category addCategory(@RequestBody Category category) {

@@ -43,7 +43,7 @@ public class SecurityConfig {
 
 				.authorizeHttpRequests(
 						requests -> requests
-								.requestMatchers("api/customer/register", "api/seller/register","api/admin/addAdmin",
+								.requestMatchers("api/customer/register", "api/seller/register","api/admin/addAdmin","api/admin/viewAdminById/**",
 										"/api/admin/login/authenticate", "/api/customer/login/authenticate",
 										"/api/seller/login/authenticate", "/swagger-ui/**", "/v3/api-docs/**")
 								.permitAll())
